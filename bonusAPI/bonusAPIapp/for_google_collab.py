@@ -93,25 +93,18 @@ class Bonus:
 
     def get_bonus(self):
         # Получаем словарь с бонусами
-        # session = requests.Session()
-        # response = response = session.get('http://localhost:8000/random-bonus/', params={'unique_id': self.unique_id})
-        # names_dict = response.json()
-        names_dict = {
-            'a': random.randint(1, 10),
-            'b': random.randint(1, 10),
-            'c': random.randint(1, 10)
-        }
-        return names_dict
+        session = requests.Session()
+        response = response = session.get('https://new.analytic.neural-university.ru/api/v1/roulette/',
+                                          params={'unique_id': self.unique_id})
+        names_dict = response.json()
+        return names_dict['bonus']
 
     def post_bonus(self):
         # Отправляем в гугл таблицу
-        # session = requests.Session()
-        # response = response = session.post('http://localhost:8000/random-bonus/',
-        # params={'name': self.name, 'phone': self.phone, 'email': self.email})
-        def print_info(*args):
-            print({'name': self.name.value, 'phone': self.phone.value, 'email': self.mail.value})
-
-        return print_info
+        session = requests.Session()
+        response = session.post('https://new.analytic.neural-university.ru/api/v1/roulette//',
+                                params={'name': self.name, 'phone': self.phone, 'email': self.mail})
+        return response
 
     def show_bonuses(self, names_dict):
         print('\033[1m' + 'Готовимся выбирать бонусы. . .' + '\033[0m')
